@@ -5,7 +5,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 import java.util.Set;
 
 public class Browser {
@@ -26,16 +25,21 @@ public class Browser {
         waitWebElement(by).sendKeys(Keys.chord(Keys.CONTROL + "a"));
     }
 
-    private void highlightField(By by) {
-        WebElement element = driver.findElement(by);
-        String bgColor = element.getCssValue("backgroundColor");
+    private String highlightFieldBeforeType(By by) {
+        WebElement element = waitWebElement(by);
+        String bgColor = element.getCssValue("BackgroundColor");
         JavascriptExecutor jsE = (JavascriptExecutor) driver;
         jsE.executeScript("arguments[0].style.backgroundColor = '" + "blue" + "'", element);
-        jsE.executeScript("arguments[0].style.backgroundColor = '" + bgColor + "'", element);
-
+        return bgColor;
     }
 
-    private void highlightButton(By by) {
+    private void removeHighlightAfterType(By by, String oldBackgroundColor) {
+        WebElement element = driver.findElement(by);
+        JavascriptExecutor jsE = (JavascriptExecutor) driver;
+        jsE.executeScript("arguments[0].style.backgroundColor = '" + oldBackgroundColor + "'", element);
+    }
+
+    private void highlightBorderButtonBeforeClick(By by) {
         WebElement element = driver.findElement(by);
         String border = element.getCssValue("border");
         JavascriptExecutor jsE = (JavascriptExecutor) driver;
@@ -54,7 +58,7 @@ public class Browser {
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
     }
 
-    protected WebDriver switchToDefault() {
+    protected WebDriver switchToDefaultContext() {
         return driver.switchTo().defaultContent();
     }
 
@@ -63,8 +67,9 @@ public class Browser {
     }
 
     public void typeText(By by, String text) {
+        String oldBackgroundColor = highlightFieldBeforeType(by);
         waitWebElement(by).sendKeys(text);
-        highlightField(by);
+        removeHighlightAfterType(by, oldBackgroundColor);
     }
 
     public void typeTextWithPreliminaryClearField(By by, String text) {
@@ -73,7 +78,7 @@ public class Browser {
     }
 
     public void clickOnButton(By by) {
-        highlightButton(by);
+        highlightBorderButtonBeforeClick(by);
         waitWebElement(by).click();
     }
 
@@ -94,8 +99,7 @@ public class Browser {
     public Browser switchBetweenTwoTabs() {
         String startPage = driver.getWindowHandle();
         Set<String> tabs = driver.getWindowHandles();
-        String[] stringTabs = new String[tabs.size()];
-        tabs.toArray(stringTabs);
+        String[] stringTabs = tabs.toArray(new String[tabs.size()]);
         if (stringTabs[0].equals(startPage)) {
             driver.switchTo().window(stringTabs[1]);
         } else {
