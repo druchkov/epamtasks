@@ -1,11 +1,12 @@
 package webdriver.paste;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import webdriver.browser.BrowserFactory;
+import webdriver.browser.TypeBrowser;
 import webdriver.screen.type.TypePasteExpiration;
 import webdriver.screen.paste.CreatedPasteBinPageObject;
 import webdriver.screen.paste.PasteBinPageObject;
@@ -15,7 +16,7 @@ public class ICanWin {
     TypePasteExpiration expiration = TypePasteExpiration.TEN_MINUTES;
     String title = "helloweb";
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.OPERA);
     PasteBinPageObject pasteBin = new PasteBinPageObject(driver);
 
 

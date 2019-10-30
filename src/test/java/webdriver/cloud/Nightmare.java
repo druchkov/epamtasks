@@ -1,11 +1,13 @@
 package webdriver.cloud;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import webdriver.browser.Browser;
+import webdriver.browser.BrowserFactory;
+import webdriver.browser.TypeBrowser;
 import webdriver.screen.cloud.CalculetedResultPageObject;
 import webdriver.screen.cloud.exception.ElementNotEnabledException;
 import webdriver.screen.cloud.service.CalculateService;
@@ -14,10 +16,11 @@ import webdriver.screen.temporary_email.TenMinuteMail;
 
 public class Nightmare {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.CHROME);
+    Browser browser = new Browser(driver);
     CalculetedResultPageObject pageObject = new CalculetedResultPageObject(driver);
     TenMinuteMail mail = new TenMinuteMail(driver);
-    String costPerMonth = "1,187.77";
+    String costPerMonth = "1,082.77";
 
     @BeforeTest
     public void setUp() {
@@ -31,10 +34,11 @@ public class Nightmare {
 
     @Test
     public void sss() {
-        mail.createNewWindow().switchBetweenTwoTabs();
+        browser.createNewWindow();
+        browser.switchBetweenTwoTabs();
         mail.openPage();
         String email = mail.getEmail();
-        mail.switchBetweenTwoTabs();
+        browser.switchBetweenTwoTabs();
         driver.switchTo().frame(0);
         pageObject.clickOnEmailEstimate();
         try {
@@ -42,7 +46,7 @@ public class Nightmare {
         } catch (ElementNotEnabledException e) {
             e.printStackTrace();
         }
-        mail.switchBetweenTwoTabs();
+        browser.switchBetweenTwoTabs();
         String costPerMonthWithEmail = mail.getCostPerMonth();
         Assert.assertEquals(costPerMonthWithEmail, costPerMonth);
     }
