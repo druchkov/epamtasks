@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM
+        "http://testng.org/testng-1.0.dtd">
+<suite name="paste" parallel="classes" thread-count="2">
+    <test name="BringItOn">
+        <classes>
+            <class name="webdriver.paste.BringItOn"/>
+            <class name="webdriver.paste.ICanWin"/>
+        </classes>
+    </test>
+</suite>

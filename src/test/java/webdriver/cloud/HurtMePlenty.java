@@ -1,19 +1,20 @@
 package webdriver.cloud;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import webdriver.browser.BrowserFactory;
+import webdriver.browser.TypeBrowser;
 import webdriver.screen.cloud.CalculetedResultPageObject;
 import webdriver.screen.cloud.service.CalculateService;
 import webdriver.screen.cloud.service.FactoryCalculator;
 
 public class HurtMePlenty {
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.CHROME);
     CalculetedResultPageObject pageObject = new CalculetedResultPageObject(driver);
-    String costPerMonth = "1,187.77";
+    String costPerMonth = "1,082.77";
 
     @BeforeClass
     public void calculate() {

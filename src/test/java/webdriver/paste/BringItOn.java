@@ -1,11 +1,12 @@
 package webdriver.paste;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import webdriver.browser.BrowserFactory;
+import webdriver.browser.TypeBrowser;
 import webdriver.screen.type.TypePasteExpiration;
 import webdriver.screen.type.TypeSyntax;
 import webdriver.screen.paste.CreatedPasteBinPageObject;
@@ -19,7 +20,7 @@ public class BringItOn {
     TypePasteExpiration expiration = TypePasteExpiration.TEN_MINUTES;
     String title = "how to gain dominance among developers";
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.OPERA);
     CreatedPasteBinPageObject createdPaste = new CreatedPasteBinPageObject(driver);
 
     @BeforeClass
