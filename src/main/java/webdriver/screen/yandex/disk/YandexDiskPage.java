@@ -19,6 +19,7 @@ public class YandexDiskPage {
     private static final By FIELD_ITEMS_LOCATOR = By.xpath("//div[@class = 'client-listing']");
     private static final By NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR =
             By.xpath("//div[@class = 'menu__group']/div[contains(@class, '_new-folder')]");
+    private static final By HIND_LOCATOR = By.xpath("//div[@class = 'notifications__text js-message']");
     Browser browser;
     Logger logger = LogManager.getRootLogger();
 
@@ -50,6 +51,7 @@ public class YandexDiskPage {
     public YandexDiskPage moveFileInTresh(String nameFile) {
         logger.info("try remove " + nameFile);
         browser.moveItemInOtherItem(createLocatorForFilesByName(nameFile), TRASH_LOCATOR);
+        browser.waitWebElement(HIND_LOCATOR);
         logger.info("file " + nameFile + " removed");
         return this;
     }

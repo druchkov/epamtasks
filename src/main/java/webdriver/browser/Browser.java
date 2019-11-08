@@ -15,7 +15,7 @@ public class Browser {
         this.driver = driver;
     }
 
-    private WebElement waitWebElement(By by) {
+    public WebElement waitWebElement(By by) {
         return new WebDriverWait(driver, WAITING_TIME)
                 .until(ExpectedConditions.visibilityOfElementLocated(by));
     }
