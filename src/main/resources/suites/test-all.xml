@@ -3,8 +3,12 @@
         "http://testng.org/testng-1.0.dtd">
 <suite name="all tests" >
     <test name="all tests">
-        <packages>
-            <package name="src.test.java.webdriver.*"/>
-        </packages>
+        <classes>
+            <class name="webdriver.cloud.HurtMePlenty"/>
+            <class name="webdriver.cloud.Nightmare"/>
+            <class name="webdriver.paste.BringItOn"/>
+            <class name="webdriver.paste.ICanWin"/>
+            <class name="webdriver.yandex.disk.CreateNewFolderWithContextClickForLinux"/>
+        </classes>
     </test>
 </suite>
