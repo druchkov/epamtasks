@@ -4,19 +4,21 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import webdriver.browser.Browser;
-import webdriver.browser.BrowserFactory;
-import webdriver.browser.TypeBrowser;
+import webdriver.driver.DriverManager;
 import webdriver.screen.cloud.CalculetedResultPageObject;
 import webdriver.screen.cloud.exception.ElementNotEnabledException;
-import webdriver.screen.cloud.service.CalculateService;
+import webdriver.service.CalculateService;
 import webdriver.screen.cloud.service.FactoryCalculator;
 import webdriver.screen.temporary_email.TenMinuteMail;
+import webdriver.util.TestListener;
 
+@Listeners({TestListener.class})
 public class Nightmare {
 
-    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.CHROME);
+    WebDriver driver = DriverManager.getDriver();
     Browser browser = new Browser(driver);
     CalculetedResultPageObject pageObject = new CalculetedResultPageObject(driver);
     TenMinuteMail mail = new TenMinuteMail(driver);
@@ -29,14 +31,14 @@ public class Nightmare {
 
     @AfterTest
     public void quitDriver() {
-        driver.quit();
+        DriverManager.quiteDriver();
     }
 
     @Test
     public void sss() {
         browser.createNewWindow();
         browser.switchBetweenTwoTabs();
-        mail.openPage();
+        mail.open();
         String email = mail.getEmail();
         browser.switchBetweenTwoTabs();
         driver.switchTo().frame(0);

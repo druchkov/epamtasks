@@ -4,15 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import webdriver.browser.BrowserFactory;
-import webdriver.browser.TypeBrowser;
+import webdriver.driver.DriverManager;
 import webdriver.screen.cloud.CalculetedResultPageObject;
-import webdriver.screen.cloud.service.CalculateService;
+import webdriver.service.CalculateService;
 import webdriver.screen.cloud.service.FactoryCalculator;
+import webdriver.util.TestListener;
 
+@Listeners({TestListener.class})
 public class HurtMePlenty {
-    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.CHROME);
+    WebDriver driver = DriverManager.getDriver();
     CalculetedResultPageObject pageObject = new CalculetedResultPageObject(driver);
     String costPerMonth = "1,082.77";
 
@@ -23,7 +25,7 @@ public class HurtMePlenty {
 
     @AfterClass
     public void quitDriver() {
-        driver.quit();
+        DriverManager.quiteDriver();
     }
 
     @Test
