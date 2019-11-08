@@ -78,8 +78,9 @@ public class Browser {
     }
 
     public void clickOnButton(By by) {
+        WebElement element = waitWebElement(by);
         highlightBorderButtonBeforeClick(by);
-        waitWebElement(by).click();
+        element.click();
     }
 
     public void moveItemInOtherItem(By sourceItem, By target) {

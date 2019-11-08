@@ -1,5 +1,7 @@
 package webdriver.browser;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class BrowserFactory {
     private static final String URL_HUB = "http://localhost:4444/wd/hub";
     private static WebDriver driver = null;
+    private static Logger logger = LogManager.getRootLogger();
+
+    private BrowserFactory() {}
 
     public static WebDriver getBrowser(TypeBrowser browser) {
         switch (browser) {
@@ -19,21 +24,21 @@ public class BrowserFactory {
                 try {
                     driver = new RemoteWebDriver(new URL(URL_HUB), setUpChrome("78", Platform.WINDOWS));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e);
                 }
                 break;
             case OPERA:
                 try {
                     driver = new RemoteWebDriver(new URL(URL_HUB), setUpOpera("64", Platform.WINDOWS));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e);
                 }
                 break;
             case FIREFOX:
                 try {
                     driver = new RemoteWebDriver(new URL(URL_HUB), setUpFireFox("70", Platform.WINDOWS));
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
+                    logger.error(e);
                 }
                 break;
             default:
@@ -57,7 +62,7 @@ public class BrowserFactory {
         try {
             driver = new RemoteWebDriver(new URL(url), capabilities);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            logger.error(e);
         }
         configureDriver();
         return driver;
