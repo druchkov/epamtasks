@@ -2,13 +2,11 @@
 <!DOCTYPE suite SYSTEM
         "http://testng.org/testng-1.0.dtd">
 <suite name="all tests" >
-    <test name="all tests">
-        <classes>
-            <class name="webdriver.cloud.HurtMePlenty"/>
-            <class name="webdriver.cloud.Nightmare"/>
-            <class name="webdriver.paste.BringItOn"/>
-            <class name="webdriver.paste.ICanWin"/>
-            <class name="webdriver.yandex.disk.CreateNewFolderWithContextClickForLinux"/>
-        </classes>
+    <test name="all tests" verbose="2">
+        <packages>
+            <package name="src.test.java.webdriver.yandex.disk.*"/>
+            <package name="src.test.java.webdriver.cloud.*"/>
+            <package name="src.test.java.webdriver.paste.*"/>
+        </packages>
     </test>
 </suite>
