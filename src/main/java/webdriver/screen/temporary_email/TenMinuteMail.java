@@ -1,12 +1,11 @@
 package webdriver.screen.temporary_email;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.util.Log;
 import webdriver.screen.cloud.Browser;
 
 import java.util.regex.Matcher;
@@ -17,7 +16,6 @@ public class TenMinuteMail extends Browser {
     private final By EMAIL_ADDRESS_LOCATOR = By.id("mailAddress");
     private final By FIRST_EMAIL_LOCATOR = By.id("ui-id-1");
     private final By COAST_VALUE_LOCATOR = By.xpath("//td[not(@colspan)]/h3");
-    Logger logger = LogManager.getRootLogger();
 
     public TenMinuteMail(WebDriver driver) {
         super(driver);
@@ -30,7 +28,7 @@ public class TenMinuteMail extends Browser {
 
     public TenMinuteMail open() {
         driver.get(URL_PAGE);
-        logger.info("page opened");
+        Log.info("page opened");
         return this;
     }
 
@@ -44,7 +42,7 @@ public class TenMinuteMail extends Browser {
         Pattern pattern = Pattern.compile("[0-9+,+\\.?]+");
         Matcher matcher = pattern.matcher(costPerMonth);
         matcher.find();
-        logger.info("Cost per month received");
+        Log.info("cost per month received");
         return matcher.group();
     }
 }

@@ -5,7 +5,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import webdriver.browser.BrowserFactory;
+import webdriver.factory.BrowserFactory;
 import webdriver.browser.TypeBrowser;
 import webdriver.screen.yandex.disk.LoginPage;
 import webdriver.screen.yandex.disk.YandexDiskPage;
@@ -20,7 +20,7 @@ public class CreateNewFolderWithContextClickForLinux extends SourceTest{
 
     @AfterTest(description = "remove created folder")
     public void moveCreatedFileInTrashAndQuitDriver() {
-        new YandexDiskPage(driver).moveFileInTresh(nameFolder);
+        new YandexDiskPage(driver).moveFileInTrash(nameFolder);
     }
 
     @AfterClass(description = "kill driver")

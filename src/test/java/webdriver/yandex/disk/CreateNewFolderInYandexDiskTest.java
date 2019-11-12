@@ -10,7 +10,7 @@ public class CreateNewFolderInYandexDiskTest extends SourceTest {
 
     @AfterClass(description = "remove folder after test")
     public void moveFileInTrash() {
-        new YandexDiskPage(driver).moveFileInTresh(nameFolder);
+        new YandexDiskPage(driver).moveFileInTrash(nameFolder);
     }
 
     @Test(description = "create new folder and assert what new folder exist")

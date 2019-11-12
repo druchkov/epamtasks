@@ -4,13 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import webdriver.driver.DriverManager;
 import webdriver.model.UserYandexDisk;
-import webdriver.service.UserYandexDiskCreator;
+import webdriver.factory.UserYandexDiskFactory;
 import webdriver.util.TestListener;
 
 @Listeners({TestListener.class})
 public class SourceTest {
     protected WebDriver driver;
-    protected UserYandexDisk user = UserYandexDiskCreator.withCredentialsFromProperty();
+    protected UserYandexDisk user = UserYandexDiskFactory.withCredentialsFromProperty();
 
     @BeforeTest
     public void setup() {

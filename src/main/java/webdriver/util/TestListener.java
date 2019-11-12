@@ -1,8 +1,6 @@
 package webdriver.util;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -16,26 +14,28 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TestListener implements ITestListener {
-    private Logger log = LogManager.getRootLogger();
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
+        Log.info(iTestResult.getTestName() + "test has started");
 
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        Log.info(iTestResult.getTestName() + "test has successful");
 
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        Log.info(iTestResult.getTestName() + "test has fell");
         screenshot();
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-
+        Log.info(iTestResult.getTestName() + "test has skipped");
     }
 
     @Override
@@ -45,7 +45,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-
     }
 
     @Override
@@ -62,7 +61,7 @@ public class TestListener implements ITestListener {
                             + ".png"
             ));
         } catch (IOException exc) {
-            log.error(exc.getLocalizedMessage());
+            Log.error(exc);
         }
     }
 

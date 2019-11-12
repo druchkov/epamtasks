@@ -1,0 +1,1 @@
+mvn -Dbrowser=chrome -Dsurfire.suiteXmlFiles=src\test\resourece\suites\testng-smoke.xml -Denvironment=correct clean test
