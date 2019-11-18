@@ -1,7 +1,8 @@
-package webdriver.screen.cloud.service;
+package webdriver.service;
 
 import org.openqa.selenium.WebDriver;
 import webdriver.screen.cloud.GoogleCloudPageObject;
+import webdriver.screen.cloud.service.CloudParameters;
 
 public class CalculateService {
 

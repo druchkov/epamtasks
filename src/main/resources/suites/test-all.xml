@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM
+        "http://testng.org/testng-1.0.dtd">
+<suite name="all tests" >
+    <test name="all tests" verbose="2">
+        <packages>
+            <package name="src.test.java.webdriver.yandex.disk.*"/>
+            <package name="src.test.java.webdriver.cloud.*"/>
+            <package name="src.test.java.webdriver.paste.*"/>
+        </packages>
+    </test>
+</suite>

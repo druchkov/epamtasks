@@ -4,14 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import webdriver.browser.BrowserFactory;
-import webdriver.browser.TypeBrowser;
+import webdriver.driver.DriverManager;
 import webdriver.screen.type.TypePasteExpiration;
 import webdriver.screen.type.TypeSyntax;
 import webdriver.screen.paste.CreatedPasteBinPageObject;
 import webdriver.screen.paste.PasteBinPageObject;
+import webdriver.util.TestListener;
 
+@Listeners({TestListener.class})
 public class BringItOn {
     String code = "git config --global user.name  \"New Sheriff in Town\"\n" +
             "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
@@ -20,7 +22,7 @@ public class BringItOn {
     TypePasteExpiration expiration = TypePasteExpiration.TEN_MINUTES;
     String title = "how to gain dominance among developers";
 
-    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.OPERA);
+    WebDriver driver = DriverManager.getDriver();
     CreatedPasteBinPageObject createdPaste = new CreatedPasteBinPageObject(driver);
 
     @BeforeClass
@@ -36,7 +38,7 @@ public class BringItOn {
 
     @AfterClass
     public void quitOfDriver() {
-        driver.quit();
+        DriverManager.quiteDriver();
     }
 
     @Test

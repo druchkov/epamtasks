@@ -4,19 +4,21 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import webdriver.browser.BrowserFactory;
-import webdriver.browser.TypeBrowser;
+import webdriver.driver.DriverManager;
 import webdriver.screen.type.TypePasteExpiration;
 import webdriver.screen.paste.CreatedPasteBinPageObject;
 import webdriver.screen.paste.PasteBinPageObject;
+import webdriver.util.TestListener;
 
+@Listeners({TestListener.class})
 public class ICanWin {
     String text = "Hello from WebDriver";
     TypePasteExpiration expiration = TypePasteExpiration.TEN_MINUTES;
     String title = "helloweb";
 
-    WebDriver driver = BrowserFactory.getBrowser(TypeBrowser.OPERA);
+    WebDriver driver = DriverManager.getDriver();
     PasteBinPageObject pasteBin = new PasteBinPageObject(driver);
 
 
@@ -27,7 +29,7 @@ public class ICanWin {
 
     @AfterTest
     public void quitOfDriver() {
-        driver.quit();
+        DriverManager.quiteDriver();
     }
 
     @Test

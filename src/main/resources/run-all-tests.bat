@@ -1,0 +1,1 @@
+mvn -Dbrowser=chrome -Dsurefire.suiteXmlFiles=src\test\resourece\suites\test-all.xml -Denvironment=correct clean test

@@ -1,23 +1,17 @@
 package webdriver.yandex.disk;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import webdriver.browser.BrowserFactory;
+import webdriver.factory.BrowserFactory;
 import webdriver.browser.TypeBrowser;
 import webdriver.screen.yandex.disk.LoginPage;
 import webdriver.screen.yandex.disk.YandexDiskPage;
 
-public class CreateNewFolderWithContextClickForLinux {
-    String sauceUserName = "d.druchkov";
-    String sauceAccessKey = "fdf2abf5-fc5e-4a81-899b-5a9e7f230ed5";
-    String url = "https://" + sauceUserName + ":" + sauceAccessKey + "@ondemand.eu-central-1.saucelabs.com:443/wd/hub";
-    WebDriver driver;
+public class CreateNewFolderWithContextClickForLinux extends SourceTest{
     String nameFolder = "test";
-
 
     @BeforeTest(description = "set up driver for work on linux")
     public void setup() {
@@ -26,7 +20,7 @@ public class CreateNewFolderWithContextClickForLinux {
 
     @AfterTest(description = "remove created folder")
     public void moveCreatedFileInTrashAndQuitDriver() {
-        new YandexDiskPage(driver).moveFileInTresh(nameFolder);
+        new YandexDiskPage(driver).moveFileInTrash(nameFolder);
     }
 
     @AfterClass(description = "kill driver")
@@ -38,10 +32,7 @@ public class CreateNewFolderWithContextClickForLinux {
     public void createNewFolderWithContextClick() {
         new LoginPage(driver)
                 .open()
-                .typeLogin("qaAutomationGomel")
-                .clickOnLogin()
-                .typePassword("gomelQa")
-                .clickOnLogin();
+                .login(user);
         YandexDiskPage pageObject = new YandexDiskPage(driver);
                 pageObject.createFolderFromContextMenu(nameFolder);
         Assert.assertTrue(pageObject.isFileExist(nameFolder) );
