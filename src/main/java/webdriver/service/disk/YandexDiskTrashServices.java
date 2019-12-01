@@ -8,8 +8,9 @@ public class YandexDiskTrashServices {
     private static YandexDiskPage trashPage = new TrashPage();
 
     public static TrashPage emptyTrash() {
-       return trashPage.clickOnTrashLink()
+        return trashPage.clickOnTrashLink()
                 .clickOnClearTrash()
-                .emptyTrash();
+                .emptyTrash()
+                .waitHint();
     }
 }
