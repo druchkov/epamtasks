@@ -2,7 +2,6 @@ package webdriver.screen.yandex.disk;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.util.Log;
@@ -19,30 +18,57 @@ public class YandexDiskPage {
     private static final By NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR =
             By.xpath("//div[@class = 'menu__group']/div[contains(@class, '_new-folder')]");
     private static final By HIND_LOCATOR = By.xpath("//div[@class = 'notifications__text js-message']");
-    Browser browser;
+    protected static final By LINK_TRASH_LOCATOR = By.xpath("//a[@href ='/client/trash']");
+    protected static Browser browser;
 
-    public YandexDiskPage(WebDriver driver) {
+    public YandexDiskPage() {
         if (browser == null) {
-            browser = new Browser(driver);
+            browser = new Browser();
         }
     }
 
-    private By createLocatorForFilesByName(String name) {
+    protected By createLocatorForFilesByName(String name) {
         String locator = String.
                 format("//span[text() = '%s']/ancestor::div[contains(@class, 'listing-item_size_m')]", name);
         return By.xpath(locator);
     }
 
-    public YandexDiskPage createNewFolder(String nameFolder) {
+    public YandexDiskPage clickOnCreateItem() {
         browser.clickOnButton(BUTTON_CREATE_LOCATOR);
         Log.info("Clicked on create button");
+        return this;
+    }
+
+    public YandexDiskPage clickOnCreateNewFolder() {
         browser.clickOnButton(BUTTON_CREATE_NEW_FOLDER_LOCATOR);
         Log.info("clicked on create folder");
-        browser.typeTextWithPreliminaryClearField(FIELD_FOR_CREATE_NEW_NAME_FILE_LOCATOR, nameFolder);
-        Log.info(String.format("Typed: %s name folder", nameFolder));
-        browser.clickOnButton(BUTTON_SAVE_LOCATOR);
-        Log.info(String.format("New folder '%s' created", nameFolder));
         return this;
+    }
+
+    public YandexDiskPage typeNewNameItem(String name) {
+        browser.typeTextWithPreliminaryClearField(FIELD_FOR_CREATE_NEW_NAME_FILE_LOCATOR, name);
+        Log.info(String.format("Typed: %s name folder", name));
+        return this;
+    }
+
+    public YandexDiskPage clickOnButtonSave() {
+        browser.clickOnButton(BUTTON_SAVE_LOCATOR);
+        Log.info("New folder created");
+        return this;
+    }
+
+    public YandexDiskPage clickOnNewFolderFromContextClick() {
+        browser.contextClick(FIELD_ITEMS_LOCATOR);
+        Log.info("Context menu opened");
+        browser.clickOnButton(NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR);
+        Log.info("Clicked on 'new folder'");
+        return this;
+    }
+
+    public TrashPage clickOnTrashLink() {
+        browser.clickOnButton(LINK_TRASH_LOCATOR);
+        Log.info("Click on Trash link");
+        return new TrashPage();
     }
 
     public YandexDiskPage moveFileInTrash(String nameFile) {
@@ -50,18 +76,6 @@ public class YandexDiskPage {
         browser.moveItemInOtherItem(createLocatorForFilesByName(nameFile), TRASH_LOCATOR);
         browser.waitWebElement(HIND_LOCATOR);
         Log.info("file " + nameFile + " removed");
-        return this;
-    }
-
-    public YandexDiskPage createFolderFromContextMenu(String nameFolder) {
-        browser.contextClick(FIELD_ITEMS_LOCATOR);
-        Log.info("Context menu opened");
-        browser.clickOnButton(NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR);
-        Log.info("Clicked on 'new folder'");
-        browser.typeTextWithPreliminaryClearField(FIELD_FOR_CREATE_NEW_NAME_FILE_LOCATOR, nameFolder);
-        Log.info(String.format("Typed: %s name folder", nameFolder));
-        browser.clickOnButton(BUTTON_SAVE_LOCATOR);
-        Log.info("New folder created from context menu");
         return this;
     }
 

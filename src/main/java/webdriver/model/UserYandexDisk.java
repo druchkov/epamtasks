@@ -10,6 +10,9 @@ public class UserYandexDisk {
         this.userPassword = password;
     }
 
+    public UserYandexDisk() {
+    }
+
     public String getUsername() {
         return username;
     }

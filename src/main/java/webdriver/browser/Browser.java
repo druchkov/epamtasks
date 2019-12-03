@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import webdriver.driver.DriverManager;
 
 import java.util.Set;
 
@@ -11,8 +12,10 @@ public class Browser {
     private static final int WAITING_TIME = 10;
     private WebDriver driver;
 
-    public Browser(WebDriver driver) {
-        this.driver = driver;
+    public Browser() {
+        if (driver == null) {
+            this.driver = DriverManager.getDriver();
+        }
     }
 
     public WebElement waitWebElement(By by) {

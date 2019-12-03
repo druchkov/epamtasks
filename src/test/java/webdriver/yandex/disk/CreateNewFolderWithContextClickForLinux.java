@@ -1,3 +1,4 @@
+
 package webdriver.yandex.disk;
 
 import org.testng.Assert;
@@ -7,8 +8,10 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import webdriver.factory.BrowserFactory;
 import webdriver.browser.TypeBrowser;
+import webdriver.factory.UserYandexDiskFactory;
 import webdriver.screen.yandex.disk.LoginPage;
 import webdriver.screen.yandex.disk.YandexDiskPage;
+import webdriver.service.disk.YandexDiskServices;
 
 public class CreateNewFolderWithContextClickForLinux extends SourceTest{
     String nameFolder = "test";
@@ -20,7 +23,7 @@ public class CreateNewFolderWithContextClickForLinux extends SourceTest{
 
     @AfterTest(description = "remove created folder")
     public void moveCreatedFileInTrashAndQuitDriver() {
-        new YandexDiskPage(driver).moveFileInTrash(nameFolder);
+        new YandexDiskPage().moveFileInTrash(nameFolder);
     }
 
     @AfterClass(description = "kill driver")
@@ -30,11 +33,10 @@ public class CreateNewFolderWithContextClickForLinux extends SourceTest{
 
     @Test(description = "create new folder with context click")
     public void createNewFolderWithContextClick() {
-        new LoginPage(driver)
-                .open()
-                .login(user);
-        YandexDiskPage pageObject = new YandexDiskPage(driver);
-                pageObject.createFolderFromContextMenu(nameFolder);
-        Assert.assertTrue(pageObject.isFileExist(nameFolder) );
+
+        UserYandexDiskFactory.withCredentialsFromProperty();
+        boolean isFileExist = YandexDiskServices.createNewFolderFromContextMenu(nameFolder)
+                .isFileExist(nameFolder);
+        Assert.assertTrue(isFileExist, "File wasn't found");
     }
 }
