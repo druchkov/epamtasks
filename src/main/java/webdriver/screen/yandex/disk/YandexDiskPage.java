@@ -12,7 +12,7 @@ public class YandexDiskPage {
     private static final By BUTTON_CREATE_NEW_FOLDER_LOCATOR = By.xpath("//span[contains(@class,'file-icon_dir_plus')]/..");
     private static final By FIELD_FOR_CREATE_NEW_NAME_FILE_LOCATOR =
             By.xpath("//form[@class = 'rename-dialog__rename-form']//input");
-    private static final By BUTTON_SAVE_LOCATOR = By.xpath("//div[@class = 'dialog__body']//button");
+    private static final By SAVE_BUTTON_LOCATOR = By.xpath("//div[@class = 'dialog__body']//button");
     private static final By TRASH_LOCATOR = By.xpath("//div[contains(@class, 'js-prevent-drag')]");
     private static final By FIELD_ITEMS_LOCATOR = By.xpath("//div[@class = 'client-listing']");
     private static final By NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR =
@@ -51,13 +51,13 @@ public class YandexDiskPage {
         return this;
     }
 
-    public YandexDiskPage clickOnButtonSave() {
-        browser.clickOnButton(BUTTON_SAVE_LOCATOR);
+    public YandexDiskPage clickOnSaveButton() {
+        browser.clickOnButton(SAVE_BUTTON_LOCATOR);
         Log.info("New folder created");
         return this;
     }
 
-    public YandexDiskPage clickOnNewFolderFromContextClick() {
+    public YandexDiskPage clickOnNewFolderFromContext() {
         browser.contextClick(FIELD_ITEMS_LOCATOR);
         Log.info("Context menu opened");
         browser.clickOnButton(NEW_FOLDER_FROM_CONTEXT_MENU_LOCATOR);
@@ -87,5 +87,9 @@ public class YandexDiskPage {
         } catch (TimeoutException exc) {
             return false;
         }
+    }
+
+    public boolean isPageOpen() {
+        return browser.waitWebElement(BUTTON_CREATE_LOCATOR).isEnabled();
     }
 }

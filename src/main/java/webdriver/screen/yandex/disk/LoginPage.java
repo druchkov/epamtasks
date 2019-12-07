@@ -1,7 +1,6 @@
 package webdriver.screen.yandex.disk;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import webdriver.util.Log;
 import webdriver.browser.Browser;
 import webdriver.model.UserYandexDisk;
@@ -13,11 +12,12 @@ public class LoginPage {
     private static final By FIELD_FOR_LOGIN_LOCATOR = By.id("passp-field-login");
     private static final By BUTTON_LOGIN_LOCATOR = By.xpath("//*[@* = 'submit']");
     private static final By FIELD_FOR_PASSWORD_LOCATOR = By.id("passp-field-passwd");
-    Browser browser;
+    private static final By ERROR_MESSAGE_LOCATOR = By.xpath("//div[@class='passp-form-field__error']");
+    protected static Browser browser;
 
-    public LoginPage(WebDriver driver) {
+    public LoginPage() {
         if (browser == null) {
-            browser = new Browser(driver);
+            browser = new Browser();
         }
     }
 
@@ -51,6 +51,10 @@ public class LoginPage {
                 .typePassword(user.getUserPassword())
                 .clickOnLogin();
         Log.info("Login performed");
-        return new YandexDiskPage(browser.getDriver());
+        return new YandexDiskPage();
+    }
+
+    public String getTextMessage() {
+        return browser.waitWebElement(ERROR_MESSAGE_LOCATOR).getText();
     }
 }
