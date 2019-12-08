@@ -35,8 +35,8 @@ public class CreateNewFolderWithContextClickForLinux extends SourceTest{
     public void createNewFolderWithContextClick() {
 
         UserYandexDiskFactory.withCredentialsFromProperty();
-        boolean isFileExist = YandexDiskServices.createNewFolderFromContextMenu(nameFolder)
-                .isFileExist(nameFolder);
+        YandexDiskServices.createNewFolderFromContextMenu(nameFolder);
+        boolean isFileExist = new YandexDiskPage().isFileExist(nameFolder);
         Assert.assertTrue(isFileExist, "File wasn't found");
     }
 }
