@@ -17,6 +17,6 @@ public class CreateNewFolderInYandexDiskTest extends SourceTest {
     public void createNewFolder() {
         YandexDiskServices.createNewFolder(nameFolder);
         boolean fileExist = new YandexDiskPage().isFileExist(nameFolder);
-        Assert.assertTrue(fileExist, "File " + nameFolder + " not found");
+        Assert.assertTrue(fileExist, String.format("File %s not found", nameFolder));
     }
 }

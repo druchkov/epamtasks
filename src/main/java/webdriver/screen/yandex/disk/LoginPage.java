@@ -54,7 +54,7 @@ public class LoginPage {
         return new YandexDiskPage();
     }
 
-    public String getTextMessage() {
+    public String getErrorTextMessage() {
         return browser.waitWebElement(ERROR_MESSAGE_LOCATOR).getText();
     }
 }

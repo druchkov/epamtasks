@@ -18,14 +18,14 @@ public class YandexDiskSteps {
         new YandexDiskPage().moveFileInTrash(name);
     }
 
-    @Given("^(The )?[Uu]ser clicks? on trash link$")
+    @Given("^(The )?[Uu]ser clicks? on trash (link)?$")
     public void clickOnTrash() {
         new YandexDiskPage().clickOnTrashLink();
     }
 
-    @Then("^(The )?[Uu]ser riches? yandex disk$")
+    @Then("^(The )?[Uu]ser riches? (?:[Yy]andex disk|[Mm]ain page)$")
     public void yandexDiskOpen() {
-        boolean result = new YandexDiskPage().isPageOpen();
+        boolean result = new YandexDiskPage().isPageOpened();
         Assert.assertTrue(result, "Page wasn't open");
     }
 }

@@ -9,11 +9,10 @@ import org.testng.annotations.Test;
 import webdriver.factory.BrowserFactory;
 import webdriver.browser.TypeBrowser;
 import webdriver.factory.UserYandexDiskFactory;
-import webdriver.screen.yandex.disk.LoginPage;
 import webdriver.screen.yandex.disk.YandexDiskPage;
 import webdriver.service.disk.YandexDiskServices;
 
-public class CreateNewFolderWithContextClickForLinux extends SourceTest{
+public class CreateNewFolderWithContextClickForLinux extends SourceTest {
     String nameFolder = "test";
 
     @BeforeTest(description = "set up driver for work on linux")

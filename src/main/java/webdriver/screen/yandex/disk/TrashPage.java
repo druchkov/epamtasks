@@ -11,7 +11,7 @@ public class TrashPage extends YandexDiskPage {
     private static final By CLEAR_TRASH_MAIN_BUTTON_LOCATOR = By.
             xpath("//div[@class='listing-head__additional-actions']/button");
     private static final By HINT_LOCATOR = By.xpath("//div[@class ='notifications__text js-message']");
-    private static final By AREA_TRASH_LOCATO = By.xpath("//div[@class='listing-item__info']" +
+    private static final By AREA_TRASH_LOCATOR = By.xpath("//div[@class='listing-item__info']" +
             "/ancestor::div[contains(@class, 'listing-item')]");
 
     public EmptyTrashWindow clickOnClearTrash() {
@@ -27,7 +27,7 @@ public class TrashPage extends YandexDiskPage {
     public boolean isTrashEmpty() {
         try {
         return new WebDriverWait(browser.getDriver(), 1)
-                .until(ExpectedConditions.visibilityOfElementLocated(AREA_TRASH_LOCATO))
+                .until(ExpectedConditions.visibilityOfElementLocated(AREA_TRASH_LOCATOR))
                 .isDisplayed();
         } catch (TimeoutException exc) {
             return false;

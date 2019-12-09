@@ -16,6 +16,6 @@ public class YandesDiskTrashSteps {
     @Then("Trash is empty")
     public void isEmpty() {
         boolean trash = new TrashPage().isTrashEmpty();
-        Assert.assertTrue(true, "Trash is not empty");
+        Assert.assertTrue(trash, "Trash is not empty");
     }
 }

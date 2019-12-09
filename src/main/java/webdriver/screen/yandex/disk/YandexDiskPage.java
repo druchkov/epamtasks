@@ -89,7 +89,7 @@ public class YandexDiskPage {
         }
     }
 
-    public boolean isPageOpen() {
+    public boolean isPageOpened() {
         return browser.waitWebElement(BUTTON_CREATE_LOCATOR).isEnabled();
     }
 }
