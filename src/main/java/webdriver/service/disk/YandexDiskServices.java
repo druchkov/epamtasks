@@ -3,21 +3,16 @@ package webdriver.service.disk;
 import webdriver.screen.yandex.disk.YandexDiskPage;
 
 public class YandexDiskServices {
-
-    private static YandexDiskPage diskPage = new YandexDiskPage();
-
-    public static YandexDiskPage createNewFolder(String nameFolder) {
-        diskPage.clickOnCreateItem()
+    public static void createNewFolder(String nameFolder) {
+        new YandexDiskPage().clickOnCreateItem()
                 .clickOnCreateNewFolder()
                 .typeNewNameItem(nameFolder)
-                .clickOnButtonSave();
-        return diskPage;
+                .clickOnSaveButton();
     }
 
-    public static YandexDiskPage createNewFolderFromContextMenu(String nameFolder) {
-        diskPage.clickOnNewFolderFromContextClick()
+    public static void createNewFolderFromContextMenu(String nameFolder) {
+        new YandexDiskPage().clickOnNewFolderFromContext()
                 .typeNewNameItem(nameFolder)
-                .clickOnButtonSave();
-        return diskPage;
+                .clickOnSaveButton();
     }
 }

@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Browser {
     private static final int WAITING_TIME = 10;
-    private WebDriver driver;
+    private static WebDriver driver;
 
     public Browser() {
         if (driver == null) {

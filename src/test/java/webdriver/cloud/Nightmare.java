@@ -19,7 +19,7 @@ import webdriver.util.TestListener;
 public class Nightmare {
 
     WebDriver driver = DriverManager.getDriver();
-    Browser browser = new Browser(driver);
+    Browser browser = new Browser();
     CalculetedResultPageObject pageObject = new CalculetedResultPageObject(driver);
     TenMinuteMail mail = new TenMinuteMail(driver);
     String costPerMonth = "1,082.77";

@@ -17,7 +17,7 @@ public class BrowserFactory {
 
     private BrowserFactory() {}
 
-    public static WebDriver getBrowser(TypeBrowser browser) {
+    public static WebDriver getWebDriver(TypeBrowser browser) {
         if (driver == null) {
             switch (browser) {
                 case CHROME:

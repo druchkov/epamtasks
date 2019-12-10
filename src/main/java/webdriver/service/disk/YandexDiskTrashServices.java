@@ -7,9 +7,16 @@ public class YandexDiskTrashServices {
 
     private static YandexDiskPage trashPage = new TrashPage();
 
-    public static TrashPage emptyTrash() {
-        return trashPage.clickOnTrashLink()
+    public static void moveInTrashAndClearTrash() {
+        new YandexDiskPage().clickOnTrashLink()
                 .clickOnClearTrash()
+                .emptyTrash()
+                .waitHint();
+    }
+
+    public static void clearTrash() {
+        new TrashPage().
+                clickOnClearTrash()
                 .emptyTrash()
                 .waitHint();
     }
