@@ -1,6 +1,5 @@
 package webservice.application;
 
-import kong.unirest.HttpResponse;
 import kong.unirest.UnirestInstance;
 
 public class ApplicationClient {
