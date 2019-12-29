@@ -13,7 +13,7 @@ public class DriverSetup {
 
     private DesiredCapabilities setCapability() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "R58M65JJN2P");
+        capabilities.setCapability("deviceName", "emulator-5554");
         capabilities.setCapability("platformName", "Android");
         File app = new File("src/main/resources/onliner.apk");
         capabilities.setCapability("app", app.getAbsolutePath());
@@ -23,6 +23,18 @@ public class DriverSetup {
     public AndroidDriver getDriver() throws MalformedURLException {
         if (driver == null) {
             driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), setCapability());
+        }
+        return driver;
+    }
+
+    public AndroidDriver getDriver(String apkName) throws MalformedURLException {
+        if (driver == null) {
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("deviceName", "emulator-5554");
+            capabilities.setCapability("platformName", "Android");
+            File app = new File(String.format("src/main/resources/%s.apk", apkName));
+            capabilities.setCapability("app", app.getAbsolutePath());
+            driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         }
         return driver;
     }
