@@ -11,11 +11,20 @@ public class PropertyForMobileFactory {
 
     private PropertyForMobileFactory() {}
 
-    public static DesiredCapabilities getCapabilities() {
+    public static DesiredCapabilities getCapabilitiesOnliner() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("deviceName", PropertyReader.getData(DEVICE_NAME));
         capabilities.setCapability("platformName", PropertyReader.getData(PLATFORM_NAME));
         File app = new File("src/main/resources/onliner.apk");
+        capabilities.setCapability("app", app.getAbsolutePath());
+        return capabilities;
+    }
+
+    public static DesiredCapabilities getCapabilitiesBracket() {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("deviceName", PropertyReader.getData(DEVICE_NAME));
+        capabilities.setCapability("platformName", PropertyReader.getData(PLATFORM_NAME));
+        File app = new File("src/main/resources/bracket.apk");
         capabilities.setCapability("app", app.getAbsolutePath());
         return capabilities;
     }
