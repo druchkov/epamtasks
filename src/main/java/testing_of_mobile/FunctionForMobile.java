@@ -12,35 +12,51 @@ import java.net.MalformedURLException;
 public class FunctionForMobile {
     private static final int WAITING_TIME = 10;
 
-    public WebElement waitWebElement(By by) throws MalformedURLException {
-        return new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
-                .until(ExpectedConditions.visibilityOfElementLocated(by));
+    public WebElement waitWebElement(By by) {
+        WebElement element = null;
+        try {
+            element = new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
+                    .until(ExpectedConditions.visibilityOfElementLocated(by));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return element;
     }
 
-    public WebElement waitWebElementToClickable(By by) throws MalformedURLException {
-        return new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
-                .until(ExpectedConditions.elementToBeClickable(by));
+    public WebElement waitWebElementToClickable(By by) {
+        WebElement element = null;
+        try {
+            element = new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
+                    .until(ExpectedConditions.elementToBeClickable(by));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return element;
     }
 
-    public void clickOnButton(By by) throws MalformedURLException {
+    public void clickOnButton(By by) {
         waitWebElementToClickable(by).click();
     }
 
-    public boolean isButtonEnabled(By by) throws MalformedURLException {
+    public boolean isButtonEnabled(By by) {
         return waitWebElement(by).isEnabled();
     }
 
-    public void typeText(By by, String text) throws MalformedURLException {
+    public void typeText(By by, String text) {
         WebElement element = waitWebElement(by);
         element.click();
         element.sendKeys(text);
     }
 
-    public String getTextElement(By by) throws MalformedURLException {
+    public String getTextElement(By by) {
         return waitWebElement(by).getText();
     }
 
-    public void killDriver() throws MalformedURLException {
-        new DriverSetup().getDriver().quit();
+    public void killDriver() {
+        try {
+            new DriverSetup().getDriver().quit();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }
