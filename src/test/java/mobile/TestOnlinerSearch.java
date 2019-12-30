@@ -13,7 +13,7 @@ public class TestOnlinerSearch extends FunctionForMobile {
     @BeforeTest
     public void setup() {
         try {
-            new DriverSetup().getDriver();
+            new DriverSetup().getDriver("onliner");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -21,15 +21,11 @@ public class TestOnlinerSearch extends FunctionForMobile {
 
     @AfterTest
     public void closeDriver() {
-        try {
-            killDriver();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        killDriver();
     }
 
     @Test(description = "Check that the firs Iphone 8 plus costs 1350 p")
-    public void searchInOnliner() throws MalformedURLException {
+    public void searchInOnliner() {
         String idLocator = "by.onliner.catalog:id/";
         By loupeLocator = By.id(idLocator + "menu_search");
         By searchFieldLocator = By.id(idLocator + "search_src_text");

@@ -23,10 +23,6 @@ public class SourceTest {
 
     @AfterTest
     public void killDriver() {
-        try {
-            new FunctionForMobile().killDriver();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        new FunctionForMobile().killDriver();
     }
 }

@@ -4,12 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-
 public class CalculateTest extends SourceTest {
 
     @Test(description = "Check correct calculate", dataProvider = "calculate")
-    public void calculate(String expression, String response) throws MalformedURLException {
+    public void calculate(String expression, String response){
         String message = page.typeExpression(expression)
                 .clickOnCalculate()
                 .getTextResponse();
