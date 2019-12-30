@@ -6,32 +6,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testing_of_mobile.driver.DriverSetup;
 
-import java.net.MalformedURLException;
-
 
 public class FunctionForMobile {
     private static final int WAITING_TIME = 10;
 
     public WebElement waitWebElement(By by) {
-        WebElement element = null;
-        try {
-            element = new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
-                    .until(ExpectedConditions.visibilityOfElementLocated(by));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return element;
+        return new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
+                .until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     public WebElement waitWebElementToClickable(By by) {
-        WebElement element = null;
-        try {
-            element = new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
-                    .until(ExpectedConditions.elementToBeClickable(by));
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return element;
+        return new WebDriverWait(new DriverSetup().getDriver(), WAITING_TIME)
+                .until(ExpectedConditions.elementToBeClickable(by));
     }
 
     public void clickOnButton(By by) {
@@ -53,10 +39,6 @@ public class FunctionForMobile {
     }
 
     public void killDriver() {
-        try {
-            new DriverSetup().getDriver().quit();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        new DriverSetup().getDriver().quit();
     }
 }
