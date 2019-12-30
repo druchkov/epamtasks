@@ -8,22 +8,24 @@ import java.io.File;
 public class PropertyForMobileFactory {
     private static final String PLATFORM_NAME = "platform.name";
     private static final String DEVICE_NAME =  "device.name";
+    private static DesiredCapabilities capabilities = new DesiredCapabilities();
 
     private PropertyForMobileFactory() {}
 
-    public static DesiredCapabilities getCapabilitiesOnliner() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+    private static void setupPlatform() {
         capabilities.setCapability("deviceName", PropertyReader.getData(DEVICE_NAME));
         capabilities.setCapability("platformName", PropertyReader.getData(PLATFORM_NAME));
+    }
+
+    public static DesiredCapabilities getCapabilitiesOnliner() {
+        setupPlatform();
         File app = new File("src/main/resources/onliner.apk");
         capabilities.setCapability("app", app.getAbsolutePath());
         return capabilities;
     }
 
     public static DesiredCapabilities getCapabilitiesBracket() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", PropertyReader.getData(DEVICE_NAME));
-        capabilities.setCapability("platformName", PropertyReader.getData(PLATFORM_NAME));
+        setupPlatform();
         File app = new File("src/main/resources/bracket.apk");
         capabilities.setCapability("app", app.getAbsolutePath());
         return capabilities;
