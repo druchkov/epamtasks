@@ -11,19 +11,7 @@ public class DriverSetup {
 
     private static AndroidDriver driver;
 
-    private DesiredCapabilities setCapability() {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "emulator-5554");
-        capabilities.setCapability("platformName", "Android");
-        File app = new File("src/main/resources/onliner.apk");
-        capabilities.setCapability("app", app.getAbsolutePath());
-        return capabilities;
-    }
-
-    public AndroidDriver getDriver() throws MalformedURLException {
-        if (driver == null) {
-            driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), setCapability());
-        }
+    public AndroidDriver getDriver() {
         return driver;
     }
 
