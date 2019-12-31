@@ -15,13 +15,13 @@ public class ElementsTest extends SourceTest {
     @Test(description = "Check hint edit text")
     public void hintEditTextTest() {
         String nameElement = page.getTextEdit();
-        Assert.assertEquals(nameElement, "Введите выражение", "Name button should be 'Введите выражение'");
+        Assert.assertEquals(nameElement, "Введите выражение", "Hint should be 'Введите выражение'");
     }
 
     @Test(description = "Check text response")
     public void checkResponseTest() {
         String nameElement = page.getTextResponse();
-        Assert.assertEquals(nameElement, "Ответ", "Name button should be 'Ответ'");
+        Assert.assertEquals(nameElement, "Ответ", "Response message should be 'Ответ'");
     }
 
     @Test(description = "Check button state")
